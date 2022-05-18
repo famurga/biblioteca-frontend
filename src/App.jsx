@@ -5,12 +5,13 @@ import Login from "./paginas/Login"
 import NuevaPassword from "./paginas/NuevaPassword"
 import OlvidePassword from "./paginas/OlvidePassword"
 import Registrar from "./paginas/Registrar"
+import AuthRouter from "./routers/AuthRouter"
 
 console.log(import.meta.env.VITE_BACKEND_URL)
 
 const App = () => {
   return (
-    <BrowserRouter>
+/*     <BrowserRouter>
       <Routes>
         <Route path="/" element={<AuthLayout />}>
           <Route index element={<Login />} />
@@ -20,7 +21,8 @@ const App = () => {
           <Route path="confirmar/:id" element={<ConfirmarCuenta />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter> */
+    <AuthRouter/>
   )
 }
 
