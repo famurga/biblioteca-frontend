@@ -55,7 +55,7 @@ const Login = () => {
                     id='email'
                     type="text"
                     placeholder='Email de registro'
-                    className='w-full mt-3 p-3 border rounded-xl bg-gray-50 '
+                    className='w-full mt-3 p-3  rounded-xl appearance-none border-2  bg-gray-50 border-gray-200   py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'
                     value={usuario}
                     onChange={e=> setUsuario(e.target.value)} 
                     />
@@ -68,7 +68,7 @@ const Login = () => {
                     id='password'
                     type="password"
                     placeholder='Password de registro'
-                    className='w-full mt-3 p-3 border rounded-xl bg-gray-50 ' 
+                    className='w-full mt-3 p-3  rounded-xl  border-2  bg-gray-50 border-gray-200   py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500' 
                     value={password}
                     onChange={e=> setPassword(e.target.value)} 
                     />
