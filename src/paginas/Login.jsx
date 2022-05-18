@@ -2,12 +2,15 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import Alerta from "../components/Alerta"
 import clienteAxios from "../config/ClienteAxios"
+import useAuth from "../hooks/useAuth"
 
 const Login = () => {
 
     const [usuario, setUsuario] = useState('')
     const [password, setPassword] = useState('')
     const [alerta, setAlerta] = useState({})
+
+const {setAuth,auth,cargando} = useAuth();
 
     const handleSubmit = async(e) =>{
         e.preventDefault();
@@ -24,9 +27,11 @@ const Login = () => {
         try {
             const { data } = await clienteAxios.post('/login', {email, password}) 
 
+            setAlerta({});
             console.log( data)
 
             localStorage.setItem('token', data.token)
+            setAuth(data);
         } catch (error) {
 
             console.log(error)
