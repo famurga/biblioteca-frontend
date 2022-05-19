@@ -13,7 +13,7 @@ const Libro = ({libro}) => {
         <td className='p-3'>{autor}</td>
         <td className='p-3'>{anhoPublicacion}</td>
         <td className='p-3'>{edicion}</td>
-        <td className='p-3'>{imagenPortada}</td>
+        <td className='p-3'> <img src={imagenPortada} alt={titulo}/></td>
         <td className='p-3'>{cantidadEjemplares}</td>
         <td className="px-6 py-4  ">
                                 <button onClick={() => navigate(`/libros/${id}`)} type="button" className="text-indigo-700 border border-indigo-500 hover:bg-indigo-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 ">
