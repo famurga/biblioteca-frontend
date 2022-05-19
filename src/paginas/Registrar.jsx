@@ -46,10 +46,11 @@ const Registrar = () => {
 
     try {
 
-     const respuesta = await clienteAxios.post( `/auth/register/` ,{
+     const {data} = await clienteAxios.post( `/auth/register/` ,{
       username,email,password,first_name,password2,last_name
     })
-    console.log(respuesta)
+    localStorage.setItem('usuario',data.username)
+ 
       setUsername('');
       setEmail('');
       setFirst_name('');

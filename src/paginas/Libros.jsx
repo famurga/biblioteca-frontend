@@ -12,7 +12,7 @@ const Libros = () => {
   console.log(libros)
   return (
  <>
-  <h1 className='text-4xl font-black'>Libros Registrados </h1>
+  <h1 className='text-4xl font-black text-center'>Libros Registrados </h1>
   <div className='bg-white shadow mt-10 rounded-lg p-5'>
 {/*     {libros.length ? libros.map( libro =>(
       <Table libro={libro}/>

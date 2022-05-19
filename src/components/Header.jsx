@@ -7,24 +7,25 @@ const Header = () => {
         <div className='md: flex md:justify-between'>
             <h2 className='text-4xl text-sky-600 font-black'>Biblioteca</h2>
 
-            <input 
+       {/*      <input 
             type="search" 
             placeholder='Buscar libro'
             className='rounded-lg lg:w-96 block p-2 border'
-            />
-            <div className='flex items-center gap-4'>
+            /> */}
+            <div className='text-3xl text-sky-600 font-black'>
                 <Link
                     to="/libros"
-                    className='font-bold uppercase'
+                    className='font-bold '
                 >
-                Libros
+                Registro de Libros
                 </Link>
-                <button
+               
+            </div>
+            <button
                 className='text-white text-sm bg-sky-600 p-3 rounded-md uppercase font-bold'
                 type='button'>
                     Cerrar Sesión
                 </button>
-            </div>
         </div>
 
     </header>

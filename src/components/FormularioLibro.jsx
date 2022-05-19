@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom';
 import useLibros from '../hooks/useLibros';
 import Alerta from './Alerta';
 
+
 const FormularioLibro = () => {
 
+    const [id, setId] = useState(null);
     const [titulo, setTitulo] = useState('');
     const [autor, setAutor] = useState('');
     const [anhoPublicacion, setAnio] = useState('');
@@ -11,8 +14,25 @@ const FormularioLibro = () => {
     const [imagenPortada, setPortada] = useState();
     const [cantidadEjemplares, setEjemplares] = useState('');
 
-    const {mostrarAlerta,alerta, submitLibro} = useLibros();
+    const {mostrarAlerta,alerta, submitLibro, libro} = useLibros();
 
+    const params =  useParams();
+
+    useEffect(() => {
+      if( params.id){
+          console.log('EL LIBRO ES', libro)
+          setId(libro.id);
+        setTitulo(libro.titulo)
+        setAutor(libro.autor)
+        setAnio(libro.anhoPublicacion)
+        setEdicion(libro.edicion)
+        setPortada(libro.imagenPortada)
+        setEjemplares(libro.cantidadEjemplares)
+      }
+      else{
+          console.log('Creando')
+      }
+    }, [params])
 
 
      const handleSubmit = async e => {
@@ -28,6 +48,7 @@ const FormularioLibro = () => {
          }  
 
          let formData = new FormData();
+         formData.append("id",id);
          formData.append("titulo",titulo)
          formData.append("autor",autor)
          formData.append("anhoPublicacion",anhoPublicacion)
@@ -38,6 +59,7 @@ const FormularioLibro = () => {
 
          //PASAR LOS DATOS AL PROVIDER
            await submitLibro(formData)
+         setId(null)
          setTitulo('')
          setAutor('')
          setAnio('')
@@ -46,10 +68,6 @@ const FormularioLibro = () => {
          setEjemplares('')
      }
 
-/*      const insertarArchivos = async () =>{
-        const f = new FormData();
-        f.append('imagenPortada',imagenPortada)
-     } */
 
      const {msg} = alerta;
   return (
@@ -138,7 +156,7 @@ const FormularioLibro = () => {
         </div>
 
         <input 
-        value='Crear Libro'
+        value={id ? 'Actualizar Libro' : 'Crear Libro'}
         className='bg-sky-600 w-full p-3 uppercase font-bold text-white rounded cursor-pointer hover:bg-sky-700 transition-colors '
         type="submit" />
         
