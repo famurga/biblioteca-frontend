@@ -11,7 +11,7 @@ const LibrosProvider = ({children}) => {
 
   useEffect(() => {
     
-    const getProyectos = async () => {
+    const getLibros = async () => {
 
       try {
         
@@ -25,15 +25,15 @@ const LibrosProvider = ({children}) => {
           }
         }
 
-        const {data} = await clienteAxios('/proyectos',config);
-        console.log(data);
-        setlibros(data);
+        const {data} = await clienteAxios('/libros',config);
+        console.log(data.results);
+        setlibros(data.results);
       } catch (error) {
         console.log(error)
       }
 
     }
-    getProyectos()
+    getLibros()
   }, [])
 
   const mostrarAlerta = alerta => {
@@ -48,7 +48,7 @@ const LibrosProvider = ({children}) => {
   const submitLibro = async libro => {
     try {
       const token = localStorage.getItem('token');
-      //if(!token) return
+      if(!token) return
 
       const config = {
         headers: {
@@ -58,7 +58,8 @@ const LibrosProvider = ({children}) => {
 
         
       }
-      const {data} = await clienteAxios.post('/libros', libro, config )
+      console.log('El libro',libro)
+      const {data} = await clienteAxios.post('/libros/', libro, config )
       console.log(data);
 
       setAlerta({

@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { FaEdit, FaTrash, FaSearchengin } from "react-icons/fa";
+import Libro from './Libro';
 import PaginatedItems from './PaginatedItems';
 
-const Table = ({ libro }) => {
+const Table = ({ libros }) => {
 
     //todo meterlos en un useEfact
     const [autor, setautor] = useState('Seleccione autor')
@@ -83,7 +84,18 @@ const Table = ({ libro }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr className="border-b ">
+                        {
+                            libros.map( libro=>(
+                                <Libro 
+                                key={libro.id}
+                                libro={libro} />
+                            ))
+
+                        }
+
+
+                        
+                      {/*   <tr className="border-b ">
                             <th scope="row" className="px-6 py-4 font-medium text-gray-900   whitespace-nowrap">
                                 Apple MacBook Pro 17"
                             </th>
@@ -120,7 +132,7 @@ const Table = ({ libro }) => {
                                     <FaTrash />
                                 </button>
                             </td>
-                        </tr>
+                        </tr> */}
 
                     </tbody>
                     

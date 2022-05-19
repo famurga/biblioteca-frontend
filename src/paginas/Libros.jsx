@@ -14,11 +14,11 @@ const Libros = () => {
  <>
   <h1 className='text-4xl font-black'>Libros Registrados </h1>
   <div className='bg-white shadow mt-10 rounded-lg p-5'>
-    {libros.length ? libros.map( libro =>(
+{/*     {libros.length ? libros.map( libro =>(
       <Table libro={libro}/>
-    )) : <p className=' text-center text-gray-600 uppercase'>No hay libros registrados</p>}
+    )) : <p className=' text-center text-gray-600 uppercase'>No hay libros registrados</p>} */}
 
-    <Table/>
+    <Table  libros={libros}/>
   </div>
 
 

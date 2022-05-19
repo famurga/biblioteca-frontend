@@ -6,7 +6,7 @@ import useAuth from "../hooks/useAuth"
 
 const Login = () => {
 
-    const [usuario, setUsuario] = useState('')
+    const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [alerta, setAlerta] = useState({})
 
@@ -15,9 +15,9 @@ const {setAuth,auth,cargando} = useAuth();
     const handleSubmit = async(e) =>{
         e.preventDefault();
 
-        if([usuario, password].includes('')){
+        if([username, password].includes('')){
             setAlerta({
-                msg: 'Todos los campos son obligaorios',
+                msg: 'Todos los campos son obligatorios',
                 error: true
             })
 
@@ -25,12 +25,12 @@ const {setAuth,auth,cargando} = useAuth();
         }
 
         try {
-            const { data } = await clienteAxios.post('/login', {email, password}) 
+            const { data } = await clienteAxios.post('/auth/login/', {username, password}) 
 
             setAlerta({});
             console.log( data)
 
-            localStorage.setItem('token', data.token)
+            localStorage.setItem('token', data.access)
             setAuth(data);
         } catch (error) {
 
@@ -61,8 +61,8 @@ const {setAuth,auth,cargando} = useAuth();
                     type="text"
                     placeholder='Email de registro'
                     className='w-full mt-3 p-3  rounded-xl appearance-none border-2  bg-gray-50 border-gray-200   py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'
-                    value={usuario}
-                    onChange={e=> setUsuario(e.target.value)} 
+                    value={username}
+                    onChange={e=> setUsername(e.target.value)} 
                     />
                 </div>
                 <div className='my-5'>
@@ -91,12 +91,7 @@ const {setAuth,auth,cargando} = useAuth();
                 > No tienes una cuenta? Regístrate
                 
                 </Link>
-                <Link
-                className="block text-center my-5 text-slate-500 uppercase text-sm"
-                to='olvide-password'
-                > Olvide mi password
-                
-                </Link>
+          
             </nav>
         </>
     )

@@ -6,10 +6,10 @@ const FormularioLibro = () => {
 
     const [titulo, setTitulo] = useState('');
     const [autor, setAutor] = useState('');
-    const [anioPublicacion, setAnio] = useState('');
+    const [anhoPublicacion, setAnio] = useState('');
     const [edicion, setEdicion] = useState('');
-    const [portada, setPortada] = useState('');
-    const [ejemplares, setEjemplares] = useState('');
+    const [imagenPortada, setPortada] = useState();
+    const [cantidadEjemplares, setEjemplares] = useState('');
 
     const {mostrarAlerta,alerta, submitLibro} = useLibros();
 
@@ -18,7 +18,7 @@ const FormularioLibro = () => {
      const handleSubmit = async e => {
          e.preventDefault();
 
-         if([titulo, autor , anioPublicacion, edicion,portada , ejemplares].includes('')){
+         if([titulo, autor , anhoPublicacion, edicion ,imagenPortada, cantidadEjemplares].includes('')){
 
             mostrarAlerta({
                 msg:'Todos los campos son obligatorios',
@@ -27,8 +27,17 @@ const FormularioLibro = () => {
             return
          }  
 
+         let formData = new FormData();
+         formData.append("titulo",titulo)
+         formData.append("autor",autor)
+         formData.append("anhoPublicacion",anhoPublicacion)
+         formData.append("edicion",edicion)
+         formData.append("imagenPortada",imagenPortada)
+         formData.append("cantidadEjemplares",cantidadEjemplares)
+      
+
          //PASAR LOS DATOS AL PROVIDER
-         await submitLibro({titulo, autor, anioPublicacion,edicion,portada,ejemplares})
+           await submitLibro(formData)
          setTitulo('')
          setAutor('')
          setAnio('')
@@ -36,6 +45,11 @@ const FormularioLibro = () => {
          setPortada('')
          setEjemplares('')
      }
+
+/*      const insertarArchivos = async () =>{
+        const f = new FormData();
+        f.append('imagenPortada',imagenPortada)
+     } */
 
      const {msg} = alerta;
   return (
@@ -75,11 +89,11 @@ const FormularioLibro = () => {
                 Año de Publicación
             </label>
             <input 
-            type="date"
+            type="number"
             id='anio'
             className='border w-full p-2 mt-2 placeholder:-gray-400 rounded-md'
             placeholder='Año de publicación'
-            value={anioPublicacion}
+            value={anhoPublicacion}
             onChange={(e) => setAnio(e.target.value)}
              />
         </div>
@@ -105,8 +119,8 @@ const FormularioLibro = () => {
             id='portada'
             className='border w-full p-2 mt-2 placeholder:-gray-400 rounded-md'
             placeholder='imagen del libro'
-            value={portada}
-            onChange={(e) => setPortada(e.target.value)}
+            //value={imagenPortada}
+            onChange={(e) => setPortada(e.target.files[0])}
              />
         </div>
         <div className='mb-5'>
@@ -118,7 +132,7 @@ const FormularioLibro = () => {
             id='ejemplares'
             className='border w-full p-2 mt-2 placeholder:-gray-400 rounded-md'
             placeholder='Ejemplares'
-            value={ejemplares}
+            value={cantidadEjemplares}
             onChange={(e) => setEjemplares(e.target.value)}
              />
         </div>

@@ -7,31 +7,33 @@ import RegisterUserServices from '../services/RegisterUserServices'
 
 const Registrar = () => {
 
-  const [nombre, setNombre] = useState('')
+  const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
+  const [first_name, setFirst_name] = useState('')
+  const [last_name, setLast_name] = useState('')
   const [password, setPassword] = useState('')
-  const [repetirPassword, setRepetirPassword] = useState('')
+  const [password2, setPassword2] = useState('')
   const [alerta, setAlerta] = useState({})
 
   const handleSubmit = async  e =>{
     e.preventDefault();
-    if([nombre,email,password,repetirPassword].includes('')){
+    if([username,email,password,first_name,password2,last_name].includes('')){
       setAlerta({
         msg: 'Todos los campos son obligatorios',
         error:true
       })
       return
     }
-    if( password !== repetirPassword){
+    if( password !== password2){
       setAlerta({
         msg: 'Los passwords no son iguales',
         error:true
       })
       return
     }
-    if( password.length < 6){
+    if( password.length < 8){
       setAlerta({
-        msg: 'El password es muy corto, agrega mínimo 6 caracteres',
+        msg: 'El password es muy corto, agrega mínimo 8 caracteres',
         error:true
       })
       return
@@ -44,32 +46,29 @@ const Registrar = () => {
 
     try {
 
-     const respuesta = await clienteAxios.post( `/usuarios` ,{
-      nombre,email,password
+     const respuesta = await clienteAxios.post( `/auth/register/` ,{
+      username,email,password,first_name,password2,last_name
     })
     console.log(respuesta)
-      setNombre('');
+      setUsername('');
       setEmail('');
+      setFirst_name('');
+      setLast_name('');
       setPassword('');
-      setRepetirPassword('');
+      setPassword2('');
       setAlerta({
         msg: 'creado correctamente',
-        error:true
+        error:false
       });
     } catch (error) {
+      console.log(error)
       setAlerta({
-        msg: 'error.response',
+        msg: 'No se pudo registrar el usuario',
         error:true
       });
     }
  
 
-  }
-  const registrarUsuario = async() =>{
-
-    const data = await RegisterUserServices(nombre,email,password);
-    console.log('La data');
-    console.log(data);
   }
 
   const {msg} = alerta;
@@ -84,15 +83,41 @@ const Registrar = () => {
             className='my-10 bg-white shadow  rounded-lg  p-10'>
                 <div className='my-5'>
                     <label className='uppercase text-gray-600 block text-xl font-bold' 
-                    htmlFor='nombre'
+                    htmlFor='first_name'
                     >Nombre</label>
                     <input 
-                    id='nombre'
+                    id='first_name'
                     type="text"
-                    placeholder='Nombre'
+                    placeholder='Primer Nombre'
                     className='w-full mt-3 p-3 border rounded-xl bg-gray-50 '
-                    value={nombre}
-                    onChange={e => setNombre(e.target.value)} 
+                    value={first_name}
+                    onChange={e => setFirst_name(e.target.value)} 
+                    />
+                </div>
+                <div className='my-5'>
+                    <label className='uppercase text-gray-600 block text-xl font-bold' 
+                    htmlFor='last_name'
+                    >Apellido</label>
+                    <input 
+                    id='last_name'
+                    type="text"
+                    placeholder='Apellido'
+                    className='w-full mt-3 p-3 border rounded-xl bg-gray-50 '
+                    value={last_name}
+                    onChange={e => setLast_name(e.target.value)} 
+                    />
+                </div>
+                <div className='my-5'>
+                    <label className='uppercase text-gray-600 block text-xl font-bold' 
+                    htmlFor='username'
+                    >Usuario</label>
+                    <input 
+                    id='username'
+                    type="text"
+                    placeholder='Nombre de usuario'
+                    className='w-full mt-3 p-3 border rounded-xl bg-gray-50 '
+                    value={username}
+                    onChange={e => setUsername(e.target.value)} 
                     />
                 </div>
                 <div className='my-5'>
@@ -130,8 +155,8 @@ const Registrar = () => {
                     type="password"
                     placeholder='Repetir Password '
                     className='w-full mt-3 p-3 border rounded-xl bg-gray-50 '
-                    value={repetirPassword}
-                    onChange={e => setRepetirPassword(e.target.value)}  
+                    value={password2}
+                    onChange={e => setPassword2(e.target.value)}  
                     />
                 </div>
                 <input 
