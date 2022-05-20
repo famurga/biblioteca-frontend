@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Alerta from '../components/Alerta'
 import clienteAxios from '../config/ClienteAxios'
-import RegisterUserServices from '../services/RegisterUserServices'
 import {   FaArrowRight } from "react-icons/fa";
 
 
@@ -42,8 +41,7 @@ const Registrar = () => {
 
     setAlerta({});
 
-    //Creando usuario en la API
-    console.log('Creando...')
+
 
     try {
 

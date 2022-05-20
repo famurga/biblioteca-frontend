@@ -11,7 +11,7 @@ const RutaProtegida = () => {
 
 
     const  token = localStorage.getItem('token');
-    console.log('token es ',token) 
+
     
     return (
         <>

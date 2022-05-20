@@ -16,18 +16,14 @@ const LibrosProvider = ({children}) => {
   const navigate = useNavigate();
 
 
-  console.log('EN LIBROS PROVIDER');
-
   useEffect(() => {
     
     const getLibros = async () => {
       setCargando(true);
-      console.log('getLibros');
 
       try {
         
         const token = localStorage.getItem('token');
-        console.log('el token en getlibros', token)
        
         const config = {
           headers: {
@@ -40,39 +36,14 @@ const LibrosProvider = ({children}) => {
  
         setlibros(data.results);
       } catch (error) {
-        console.log(error)
+        console.log('')
       }
       finally{
         setCargando(false);
       }
 
     }
-/*     const getLibros = async () => {
-      setCargando(true);
 
-      try {
-        
-        const token = localStorage.getItem('token');
-        if(!token) return
-  
-        const config = {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-          }
-        }
-
-        const {data} = await clienteAxios('/libros',config);
-        console.log(data.results);
-        setlibros(data.results);
-      } catch (error) {
-        console.log(error)
-      }
-      finally{
-        setCargando(false);
-      }
-
-    } */
     getLibros()
   }, [page])
 

@@ -10,8 +10,6 @@ const EditarLibro =  () => {
 
   useEffect(() => {
     getLibro(params.id)
-      console.log('efect editar')
-      console.log('efect libro',libro)
   }, [])
 
   const { id, titulo, autor, anhoPublicacion, edicion, imagenPortada, cantidadEjemplares } = libro;
