@@ -86,7 +86,7 @@ const Login = () => {
                 </div>
                 <input
                     type="submit"
-                    value='Inicar sesión'
+                    value='Iniciar sesión'
                     className='bg-sky-700 w-full py-3 mb-5 text-white uppercase font-bold rounded hover:cursor-pointer hover:bg-sky-800 transition-colors'
                 />
             </form>
