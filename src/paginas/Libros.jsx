@@ -7,9 +7,8 @@ import useLibros from '../hooks/useLibros'
 
 const Libros = () => {
 
-  const {libros} = useLibros();
 
-  console.log(libros)
+
   return (
  <>
   <h1 className='text-4xl font-black text-center'>Libros Registrados </h1>
@@ -18,7 +17,7 @@ const Libros = () => {
       <Table libro={libro}/>
     )) : <p className=' text-center text-gray-600 uppercase'>No hay libros registrados</p>} */}
 
-    <Table  libros={libros}/>
+    <Table />
   </div>
 
 

@@ -1,10 +1,16 @@
 import React, { useState } from 'react'
 import { FaCaretSquareLeft,FaCaretSquareRight } from "react-icons/fa";
+import useLibros from '../hooks/useLibros';
 
 const Paginacion = (/* {librosPerPage, totalLibros} */) => {
 
+    const {libros,page,setPage} = useLibros();
+
     const [num, setnum] = useState(1)
-    const [curr, setCurr] = useState(1)
+    /* const [curr, setCurr] = useState(1) */
+
+    console.log(num)
+    /* console.log(curr) */
 
 
     const pageNumbers = []
@@ -35,7 +41,7 @@ const Paginacion = (/* {librosPerPage, totalLibros} */) => {
 
       {
           pages.map((pg,i) => (
-              <button  onClick={() => setCurr(pg.page)} key={i} className={`h-12 border-2 border-r-0 border-indigo-600 w-12 ${ curr === pg.page && 'bg-indigo-600 text-white' }`}>{pg.page} </button>
+              <button  onClick={() => setPage(pg.page)} key={i} className={`h-12 border-2 border-r-0 border-indigo-600 w-12 ${ page === pg.page && 'bg-indigo-600 text-white' }`}>{pg.page} </button>
           ))
       }
       

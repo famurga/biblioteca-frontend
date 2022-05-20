@@ -11,11 +11,39 @@ const LibrosProvider = ({children}) => {
   const [alerta, setAlerta] = useState({})
   const [cargando, setCargando] = useState(false)
 
+  const [page, setPage] = useState(1)
+
   const navigate = useNavigate();
 
   useEffect(() => {
     
     const getLibros = async () => {
+      setCargando(true);
+
+      try {
+        
+        const token = localStorage.getItem('token');
+        if(!token) return
+  
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+          }
+        }
+
+        const {data} = await clienteAxios(`/libros/?page=${page}`,config);
+        console.log(data.results);
+        setlibros(data.results);
+      } catch (error) {
+        console.log(error)
+      }
+      finally{
+        setCargando(false);
+      }
+
+    }
+/*     const getLibros = async () => {
       setCargando(true);
 
       try {
@@ -40,9 +68,9 @@ const LibrosProvider = ({children}) => {
         setCargando(false);
       }
 
-    }
+    } */
     getLibros()
-  }, [])
+  }, [page])
 
   const mostrarAlerta = alerta => {
     setAlerta(alerta);
@@ -101,6 +129,10 @@ const LibrosProvider = ({children}) => {
       console.log(data);
     } catch (error) {
       console.log(error)
+      setAlerta({
+        msg: 'Error al actualizar el libro',
+        error: true
+      })
     }
   }
 
@@ -209,6 +241,9 @@ const LibrosProvider = ({children}) => {
       libro,
       cargando,
       eliminarLibro,
+
+      page,
+      setPage
     }}
     >
      {children}   
