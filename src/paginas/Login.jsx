@@ -3,14 +3,16 @@ import { Link } from "react-router-dom"
 import Alerta from "../components/Alerta"
 import clienteAxios from "../config/ClienteAxios"
 import useAuth from "../hooks/useAuth"
+import { useNavigate } from "react-router-dom"
 
 const Login = () => {
 
+    const navigate = useNavigate();
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [alerta, setAlerta] = useState({})
 
-const {setAuth,auth,cargando} = useAuth();
+const {setAuth} = useAuth();
 
     const handleSubmit = async(e) =>{
         e.preventDefault();
@@ -31,7 +33,15 @@ const {setAuth,auth,cargando} = useAuth();
             console.log( data)
 
             localStorage.setItem('token', data.access)
-            setAuth(data);
+            setAuth(data.acces);
+
+            setTimeout(() => {
+                
+                location.reload()
+                navigate('/libros');
+                
+            }, 2000);
+            
         } catch (error) {
 
             console.log(error)
@@ -55,11 +65,11 @@ const {setAuth,auth,cargando} = useAuth();
                 <div className='my-5'>
                     <label className='uppercase text-gray-600 block text-xl font-bold' 
                     htmlFor='email'
-                    >Email</label>
+                    >Usuario</label>
                     <input 
                     id='email'
                     type="text"
-                    placeholder='Email de registro'
+                    placeholder='Ingrese su usuario'
                     className='w-full mt-3 p-3  rounded-xl appearance-none border-2  bg-gray-50 border-gray-200   py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'
                     value={username}
                     onChange={e=> setUsername(e.target.value)} 

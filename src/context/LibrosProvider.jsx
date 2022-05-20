@@ -15,16 +15,20 @@ const LibrosProvider = ({children}) => {
 
   const navigate = useNavigate();
 
+
+  console.log('EN LIBROS PROVIDER');
+
   useEffect(() => {
     
     const getLibros = async () => {
       setCargando(true);
+      console.log('getLibros');
 
       try {
         
         const token = localStorage.getItem('token');
-        if(!token) return
-  
+        console.log('el token en getlibros', token)
+       
         const config = {
           headers: {
             "Content-Type": "application/json",
@@ -33,7 +37,7 @@ const LibrosProvider = ({children}) => {
         }
 
         const {data} = await clienteAxios(`/libros/?page=${page}`,config);
-        console.log(data.results);
+ 
         setlibros(data.results);
       } catch (error) {
         console.log(error)
@@ -77,13 +81,13 @@ const LibrosProvider = ({children}) => {
 
     setTimeout(() => {
         setAlerta({})
-    }, 5000);
+    }, 2000);
   }
 
 
   const submitLibro = async libro => {
    
-    console.log('libro.get',libro.get('id'))
+
     if( libro.get('id') !== 'null'){
       await editarLibro(libro)
     }else{
@@ -106,7 +110,7 @@ const LibrosProvider = ({children}) => {
 
         
       }
-      console.log('EL LIBRO HA EDITAR ES', libro)
+
       
       const {data} = await clienteAxios.put(`/libros/${libro.get('id')}/`, libro, config)
 
@@ -125,8 +129,6 @@ const LibrosProvider = ({children}) => {
       }, 1000);
 
 
-
-      console.log(data);
     } catch (error) {
       console.log(error)
       setAlerta({
@@ -150,9 +152,7 @@ const LibrosProvider = ({children}) => {
 
         
       }
-      console.log('El libro',libro)
       const {data} = await clienteAxios.post('/libros/', libro, config )
-      console.log('libro del provider',data);
 
       setlibros([...libros,data]);
 
@@ -167,7 +167,6 @@ const LibrosProvider = ({children}) => {
       }, 2000);
 
     } catch (error) {
-      console.log('en el catch del error');
       console.log(error);
       
     }
@@ -188,13 +187,13 @@ const LibrosProvider = ({children}) => {
       }
 
       const {data}=  await clienteAxios(`/libros/${id}/`, config)
-      console.log('la data en el getLibro', data)
+
       setlibro(data);
-      console.log('libro en el getLibro', libro)
+
 
     } catch (error) {
         console.log(error)
-        console.log('ERROR EN GET LIBRO')
+
     }
     finally{
       setCargando(false)
@@ -217,7 +216,7 @@ const LibrosProvider = ({children}) => {
       
       const librosActualizados = libros.filter(libro =>libro.id !== id )
       setlibros(librosActualizados);
-      console.log('librosActualizados',librosActualizados)
+
 
   
       

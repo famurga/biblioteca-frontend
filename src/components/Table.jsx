@@ -48,11 +48,7 @@ const Table = () => {
         setautor(e.target.value);
     }
 
-    console.log('libros',libros)
-    console.log('autor',autor)
-    console.log('año',año)
    
-
     //const  {titulo} = libro;
     return (
         <>

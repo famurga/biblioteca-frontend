@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import AuthLayout from "./layouts/AuthLayout"
 import Login from "./paginas/Login"
 import Registrar from "./paginas/Registrar"
-import AppRouter from "./routers/AppRouter"
 import AuthRouter from "./routers/AuthRouter"
 
 console.log(import.meta.env.VITE_BACKEND_URL)

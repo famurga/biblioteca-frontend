@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Alerta from '../components/Alerta'
 import clienteAxios from '../config/ClienteAxios'
 import RegisterUserServices from '../services/RegisterUserServices'
+import {   FaArrowRight } from "react-icons/fa";
 
 
 const Registrar = () => {
@@ -78,10 +79,21 @@ const Registrar = () => {
     <>
             <h1 className='text-sky-600 font-black text-6xl'>Crea tu cuenta <span className='text-slate-700 '>Biblioteca</span></h1>
             { msg && <Alerta alerta={alerta}/>}
-           
+            
+            <nav className='lg:flex lg:justify-between mt-5 '>
+
+               
+                <Link
+                className="text-lg flex items-center text-sky-600 font-black border-2 p-3 border-sky-600 rounded-lg hover:bg-sky-600 hover:text-white"
+                to='/'
+                > Login
+                <FaArrowRight className='ml-2'/>
+                </Link>
+            
+            </nav>
             <form 
             onSubmit={handleSubmit}
-            className='my-10 bg-white shadow  rounded-lg  p-10'>
+            className='my-5 bg-white shadow  rounded-lg  p-10'>
                 <div className='my-5'>
                     <label className='uppercase text-gray-600 block text-xl font-bold' 
                     htmlFor='first_name'
@@ -173,12 +185,7 @@ const Registrar = () => {
                 > Ya tienes una cuenta? Inicia Sesión
                 
                 </Link>
-                <Link
-                className="block text-center my-5 text-slate-500 uppercase text-sm"
-                to='olvide-password'
-                > Olvide mi password
-                
-                </Link>
+            
             </nav>
         </>
   )

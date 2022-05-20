@@ -4,6 +4,12 @@ import { Link } from 'react-router-dom'
 import {  FaBook } from "react-icons/fa";
 
 const Header = () => {
+
+
+  const cerrarSesion = () =>{
+      localStorage.removeItem('token');
+      location.reload();
+  }
   return (
     <header className='px-4 py-5 bg-white border-b'>
         <div className='md: flex md:justify-between'>
@@ -29,6 +35,7 @@ const Header = () => {
             </div>
             <button
                 className='text-white text-sm bg-indigo-600 p-3 rounded-md uppercase font-bold'
+                onClick={() => cerrarSesion()}
                 type='button'>
                     Cerrar Sesión
                 </button>

@@ -20,7 +20,6 @@ const FormularioLibro = () => {
 
     useEffect(() => {
       if( params.id){
-          console.log('EL LIBRO ES', libro)
           setId(libro.id);
         setTitulo(libro.titulo)
         setAutor(libro.autor)
@@ -30,7 +29,7 @@ const FormularioLibro = () => {
         setEjemplares(libro.cantidadEjemplares)
       }
       else{
-          console.log('Creando')
+
       }
     }, [params])
 

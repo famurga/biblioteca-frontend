@@ -5,13 +5,17 @@ import Sidebar from '../components/Sidebar';
 import useAuth from '../hooks/useAuth'
 const RutaProtegida = () => {
 
-    const { auth ,cargando} = useAuth();
+    const { auth,cargando} = useAuth();
+   
     if(cargando) return 'CARGANDO...'
 
-    console.log(auth)
+
+    const  token = localStorage.getItem('token');
+    console.log('token es ',token) 
+    
     return (
         <>
-        {!auth.id ? 
+        {token ? 
         
         (
             <div className='bg-gray-100 '>
