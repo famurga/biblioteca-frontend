@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
 
     const [auth, setAuth] = useState();
     const [cargando, setcargando] = useState(true)
@@ -12,31 +12,31 @@ const AuthProvider = ({children}) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        
-        const autenticarUsuario = async() =>{
+
+        const autenticarUsuario = async () => {
 
             const token = localStorage.getItem('token');
-   
-        if(!token){
-            setcargando(false)
-            return
-        }
-        setAuth(token);
-        navigate('/libros');
-        setcargando(false);
+
+            if (!token) {
+                setcargando(false)
+                return
+            }
+            setAuth(token);
+            navigate('/libros');
+            setcargando(false);
 
         }
         autenticarUsuario();
     }, [])
 
-    return(
-        <AuthContext.Provider 
-        value={{
+    return (
+        <AuthContext.Provider
+            value={{
                 setAuth,
                 auth,
                 cargando
-        }}>
-            
+            }}>
+
             {children}
 
         </AuthContext.Provider>

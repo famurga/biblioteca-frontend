@@ -21,9 +21,12 @@ const LibrosProvider = ({children}) => {
     const getLibros = async () => {
       setCargando(true);
 
+      
       try {
         
         const token = localStorage.getItem('token');
+
+        if(!token) return
        
         const config = {
           headers: {
