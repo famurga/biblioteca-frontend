@@ -24,26 +24,6 @@ const AuthProvider = ({children}) => {
         setAuth(token);
         navigate('/libros');
         setcargando(false);
-       /*  const config = {
-            Headers:{
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`
-            }
-        }
-        
-        try {
-            const {data} = await clienteAxios('/usuarios/perfil',config);
-
-            setAuth(data);
-            navigate('/libros');
-        } catch (error) {
-            setAuth({});
-            
-        }
-        finally{
-            setcargando(false);
-
-        } */
 
         }
         autenticarUsuario();
